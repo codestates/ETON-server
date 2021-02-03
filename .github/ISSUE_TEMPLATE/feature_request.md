@@ -1,14 +1,20 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: server
-assignees: ''
+title: "[Task] 작업을 작성해주세요"
+labels: server, bare-minimum
+assignees: aesopfrom0
 
 ---
 
-### Job description
-작업 내용을 적어주세요
+## Task Card
+
+**Assignee**: @aesopfrom0
+
+### Job Description
+
+- [ ] 
+- [ ] 
+
 
 ### 결과물
-결과물을 적어주세요
