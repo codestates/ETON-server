@@ -37,7 +37,7 @@ async function signup(req, res){
     if (exUser) {
       res.status(409).send({ message: "This email's already registered." });
     } else {
-      let userInfo = await users.create({
+      await users.create({
         username,
         email,
         password,

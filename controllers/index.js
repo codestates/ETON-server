@@ -2,7 +2,7 @@ module.exports = {
   basicSignup: require('./users/BasicSignup'),
   basicLogin: require('./users/BasicLogin'),
   socialLogin: require('./users/SocialLogin'),
-  accessTokenRequest: require('./users/AccessTokenRequest'),
+  userInfo: require('./users/UserInfo'),
   refreshTokenRequest: require('./users/RefreshTokenRequest'),
   logout: require('./users/Logout')
 };

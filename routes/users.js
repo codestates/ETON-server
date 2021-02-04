@@ -6,7 +6,6 @@ const controllers = require("../controllers");
 //* POST /users/signin/basic
 router.post("/signin/basic", controllers.basicLogin);
 
-router.get("/signin/github", controllers.socialLogin.logIntoGithub) //! callback 말고 다른 걸로
 router.get("/signin/github/callback", controllers.socialLogin.callback)
 
 router.get("/signup/email", controllers.basicSignup.isEmailUnique)

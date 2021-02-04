@@ -29,12 +29,13 @@ async function modifyUserInfo(req, res) {
   const { id, email, password, username } = req.body
   let userInfo = await users.findOne({where: { id }})
   if(!userInfo) {
-    res.status(404).json({message: "Not found"})
+    res.status(404).json({message: "Not found."})
   } else {
     userInfo.email = email
     userInfo.password = password
     userInfo.username = username
-    await userInfo.save();
+    await userInfo.save()
+    res.send(201).json({message: "Your info got modified."})
   }
 }
 
