@@ -15,4 +15,8 @@ router.post("/signup", controllers.basicSignup.signup)
 
 router.post("/signout", controllers.logout)
 
+router.get("/userinfo", controllers.userInfo.getUserInfo);
+router.post("/userinfo", controllers.userInfo.modifyUserInfo);
+router.get("/refreshtokenrequest", controllers.refreshTokenRequest);
+
 module.exports = router;
