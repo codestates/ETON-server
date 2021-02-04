@@ -20,6 +20,11 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.get('/', (req, res) => {
+  res.json('hey')
+})
 app.use(cookieParser());
 
 app.use('/users', usersRouter);

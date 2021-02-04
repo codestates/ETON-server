@@ -4,11 +4,11 @@ module.exports = (req, res) => {
   // console.log('=====req.headers======')
   // console.log(req.headers)
   // console.log('=====================')
-  // console.log("======req.headers['accesstoken']===========")
-  // console.log(req.headers['accesstoken'])
-  // console.log('=============================================')
-  if(req.headers['accesstoken'] && req.cookies.refreshToken) {
-    delete req.headers['accesstoken']
+  console.log("======req.headers['authorization']===========")
+  console.log(req.headers['authorization'])
+  console.log('=============================================')
+  if(req.headers['authorization'] && req.cookies.refreshToken) {
+    delete req.headers['authorization']
     res.clearCookie('refreshToken');
     res.json({ data: null, message: "You're logged out." });
   } else {
