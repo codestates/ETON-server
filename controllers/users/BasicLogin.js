@@ -9,9 +9,9 @@ const {
 
 module.exports = (req, res) => {
   const { email, password } = req.body;
-  console.log('=================')
-  console.log(req.body)
-  console.log('=================')
+  // console.log('=================')
+  // console.log(req.body)
+  // console.log('=================')
   users.findOne({
     where: {
       email,
@@ -23,7 +23,6 @@ module.exports = (req, res) => {
       console.log(data)
       console.log('=================')
       if (!data) {
-        // return res.status(401).send({ data: null, message: 'not authorized' });
         return res.json({ data: null, message: 'not authorized' });
       }
       delete data.dataValues.password;
