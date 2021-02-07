@@ -4,5 +4,6 @@ module.exports = {
   socialLogin: require('./users/SocialLogin'),
   userInfo: require('./users/UserInfo'),
   refreshTokenRequest: require('./users/RefreshTokenRequest'),
-  logout: require('./users/Logout')
+  logout: require('./users/Logout'),
+  getBoards: require('./boards/board')
 };
