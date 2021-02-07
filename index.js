@@ -33,4 +33,4 @@ app.use("/boards", boardRouter);
 // const httpsServer = https.createServer(credentials, app);
 app.listen(4000, () => console.log(`server runnning on 4000`));
 
-module.exports = httpsServer;
+module.exports = app;
