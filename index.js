@@ -26,6 +26,11 @@ app.get("/", (req, res) => {
 });
 app.use(cookieParser());
 
+//! aws deploy만을 위한 것
+app.get("/", (req, res) => {
+  res.send("된다!");
+});
+
 app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
 
