@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 // const https = require("https");
-// const cors = require("cors");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 // const privateKey = fs.readFileSync(process.env.KEY_PATH, "utf8");
 // const certificate = fs.readFileSync(process.env.CERT_PATH, "utf8");
@@ -14,16 +14,17 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(
-//   cors({
-//     origin: ["https://localhost:3000"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: "*", //! 수정 요망
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json("hey");
 });
+
 app.use(cookieParser());
 
 //! aws deploy만을 위한 것
