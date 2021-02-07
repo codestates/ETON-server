@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const privateKey = fs.readFileSync(process.env.KEY_PATH, "utf8");
 const certificate = fs.readFileSync(process.env.CERT_PATH, "utf8");
 const credentials = { key: privateKey, cert: certificate };
-const usersRouter = require('./routes/users');
+const usersRouter = require("./routes/users");
 // const boardRouter = require('./routes/boards');
 
 const express = require("express");
@@ -21,21 +21,17 @@ app.use(
   })
 );
 
-
-app.get('/', (req, res) => {
-  res.json('hey')
-})
+app.get("/", (req, res) => {
+  res.json("hey");
+});
 app.use(cookieParser());
 
-app.use('/users', usersRouter);
-// app.use('/boards', boardRouter);
-
-// app.get("/accesstokenrequest", controllers.accessTokenRequest);
-// app.get("/refreshtokenrequest", controllers.refreshTokenRequest);
-
+app.use("/users", usersRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT;
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(HTTPS_PORT, () => console.log(`server runnning on ${HTTPS_PORT}`));
+httpsServer.listen(HTTPS_PORT, () =>
+  console.log(`server runnning on ${HTTPS_PORT}`)
+);
 
 module.exports = httpsServer;
