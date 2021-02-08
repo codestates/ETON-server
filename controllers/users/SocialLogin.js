@@ -40,6 +40,7 @@ async function callback(req, res, next) {
       )
       .then((res) => {
         console.log(`1: ${res}`);
+        return res;
       })
       .catch((err) => {
         console.log(`1: ${err}`);
@@ -54,6 +55,7 @@ async function callback(req, res, next) {
       })
       .then((res) => {
         console.log(res);
+        return res;
       })
       .catch((err) => {
         console.log(err);
