@@ -10,10 +10,15 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  console.log(`${req.url}, ${req.method}`);
+  next();
+});
 //! cors warning 발생 시 origin: "*" 필요
 app.use(
   cors({
-    origin: "http://192.168.0.10:3000",
+    origin: "*",
     credentials: true,
   })
 );
