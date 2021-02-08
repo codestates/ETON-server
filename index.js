@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 //! cors warning 발생 시 origin: "*" 필요
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "http://192.168.0.10:3000"],
     credentials: true,
   })
 );
