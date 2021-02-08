@@ -88,8 +88,8 @@ function callback(req, res, next) {
     .post(
       "https://github.com/login/oauth/access_token",
       {
-        client_id: 창섭님꺼clientId,
-        client_secret: 창섭님꺼clientPassword,
+        client_id,
+        client_secret,
         code: req.body.authorizationCode,
       },
       {
