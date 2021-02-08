@@ -62,4 +62,4 @@ async function callback(req, res, next) {
   }
 }
 
-module.exports = { logIntoGithub, callback };
+module.exports = { callback };

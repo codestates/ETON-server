@@ -10,9 +10,10 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//! cors warning 발생 시 origin: "*" 필요
 app.use(
   cors({
-    origin: "*", //! cors warning 발생 시 필요
+    origin: "*",
     credentials: true,
   })
 );
@@ -22,11 +23,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(cookieParser());
-
-//! aws deploy만을 위한 것
-// app.get("/", (req, res) => {
-//   res.send("Did it!");
-// });
 
 app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
