@@ -46,6 +46,10 @@ async function callback(req, res, next) {
         console.log(`1: ${err}`);
       });
 
+    console.log("====================");
+    console.log(githubToken);
+    console.log("====================");
+
     const githubData = await axios
       .get("https://api.github.com/user", {
         headers: {
@@ -54,7 +58,7 @@ async function callback(req, res, next) {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(`===========: ${res}`);
         return res;
       })
       .catch((err) => {
