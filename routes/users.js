@@ -9,7 +9,7 @@ router.post("/signin/basic", controllers.basicLogin);
 
 //! 클라이언트 부분 추가
 // router.get("/signin/github", controllers.socialLogin.logIntoGithub);
-router.get("/signin/github/callback", controllers.socialLogin.callback);
+router.post("/signin/github/callback", controllers.socialLogin.callback);
 
 router.get("/signup/email", controllers.basicSignup.isEmailUnique);
 
