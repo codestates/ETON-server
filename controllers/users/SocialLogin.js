@@ -18,69 +18,100 @@ const {
 //   res.redirect(url);
 // }
 
-async function callback(req, res, next) {
-  console.log(req.body.authorizationCode);
-  const code = req.body.authorizationCode;
-  try {
-    console.log(req.body.authorizationCode);
+// async function callback(req, res, next) {
+//   console.log(req.body.authorizationCode);
+//   const code = req.body.authorizationCode;
+//   try {
+//     console.log(req.body.authorizationCode);
 
-    const githubToken = await axios
-      .post(
-        "https://github.com/login/oauth/access_token",
-        {
-          client_id,
-          client_secret,
-          code,
-        },
-        {
-          headers: {
-            accept: "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(`1: ${res}`);
-        return res;
-      })
-      .catch((err) => {
-        console.log(`1: ${err}`);
-      });
+//     const githubToken = await axios
+//       .post(
+//         "https://github.com/login/oauth/access_token",
+//         {
+//           client_id,
+//           client_secret,
+//           code,
+//         },
+//         {
+//           headers: {
+//             accept: "application/json",
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log(`1: ${res}`);
+//         return res;
+//       })
+//       .catch((err) => {
+//         console.log(`1: ${err}`);
+//       });
 
-    console.log("====================");
-    console.log(githubToken);
-    console.log("====================");
+//     console.log("====================");
+//     console.log(githubToken);
+//     console.log("====================");
 
-    const githubData = await axios
-      .get("https://api.github.com/user", {
+//     const githubData = await axios
+//       .get("https://api.github.com/user", {
+//         headers: {
+//           authorization: `token ${githubToken.data.access_token}`,
+//           accept: "application/json",
+//         },
+//       })
+//       .then((res) => {
+//         console.log(`===========: ${res}`);
+//         return res;
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+
+//     console.log(githubData);
+//     const { login } = githubData.data;
+//     let exUser = await users.findOne({ where: { username: login } });
+//     if (!exUser) {
+//       exUser = await users.create({
+//         username: login,
+//       });
+//     }
+//     const accessToken = generateAccessToken(exUser.dataValues);
+//     const refreshToken = generateRefreshToken(exUser.dataValues);
+
+//     sendRefreshToken(res, refreshToken);
+//     sendAccessToken(res, accessToken);
+//   } catch (e) {
+//     next(e);
+//   }
+// }
+
+function callback(req, res, next) {
+  axios
+    .post(
+      "https://github.com/login/oauth/access_token",
+      {
+        client_id: 창섭님꺼clientId,
+        client_secret: 창섭님꺼clientPassword,
+        code: req.body.authorizationCode,
+      },
+      {
         headers: {
-          authorization: `token ${githubToken.data.access_token}`,
           accept: "application/json",
+          "content-type": "application/json",
+        },
+      }
+    )
+    .then((result) =>
+      axios.get("https://api.github.com/user", {
+        headers: {
+          authorization: `token ${result.data.access_token}`,
+          accept: "application/json",
+          "content-type": "application/json",
         },
       })
-      .then((res) => {
-        console.log(`===========: ${res}`);
-        return res;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    console.log(githubData);
-    const { login } = githubData.data;
-    let exUser = await users.findOne({ where: { username: login } });
-    if (!exUser) {
-      exUser = await users.create({
-        username: login,
-      });
-    }
-    const accessToken = generateAccessToken(exUser.dataValues);
-    const refreshToken = generateRefreshToken(exUser.dataValues);
-
-    sendRefreshToken(res, refreshToken);
-    sendAccessToken(res, accessToken);
-  } catch (e) {
-    next(e);
-  }
+    )
+    .then((result) => {
+      console.log("$$$ : ", result.data);
+      res.status(201).send({ message: "ok" });
+    });
 }
 
 module.exports = { callback };
