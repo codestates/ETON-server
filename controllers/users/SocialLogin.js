@@ -61,7 +61,7 @@ async function callback(req, res, next) {
         console.log(err);
       });
 
-    console.log(githubData.data);
+    console.log(githubData);
     const { login } = githubData.data;
     let exUser = await users.findOne({ where: { username: login } });
     if (!exUser) {
