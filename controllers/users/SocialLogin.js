@@ -24,26 +24,41 @@ async function callback(req, res, next) {
   try {
     console.log(req.body.authorizationCode);
 
-    const githubToken = await axios.post(
-      "https://github.com/login/oauth/access_token",
-      {
-        client_id,
-        client_secret,
-        code,
-      },
-      {
+    const githubToken = await axios
+      .post(
+        "https://github.com/login/oauth/access_token",
+        {
+          client_id,
+          client_secret,
+          code,
+        },
+        {
+          headers: {
+            accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(`1: ${res}`);
+      })
+      .catch((err) => {
+        console.log(`1: ${err}`);
+      });
+
+    const githubData = await axios
+      .get("https://api.github.com/user", {
         headers: {
+          authorization: `token ${githubToken.data.access_token}`,
           accept: "application/json",
         },
-      }
-    );
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    const githubData = await axios.get("https://api.github.com/user", {
-      headers: {
-        authorization: `token ${githubToken.data.access_token}`,
-        accept: "application/json",
-      },
-    });
     console.log(githubData.data);
     const { login } = githubData.data;
     let exUser = await users.findOne({ where: { username: login } });
