@@ -22,7 +22,7 @@ async function callback(req, res, next) {
   console.log(req.body.authorizationCode);
   const code = req.body.authorizationCode;
   try {
-    console.log(req.query.code);
+    console.log(req.body.authorizationCode);
 
     const githubToken = await axios.post(
       "https://github.com/login/oauth/access_token",
