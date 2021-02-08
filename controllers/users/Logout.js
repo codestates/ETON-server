@@ -10,8 +10,8 @@ module.exports = (req, res) => {
   if(req.headers['authorization'] && req.cookies.refreshToken) {
     delete req.headers['authorization']
     res.clearCookie('refreshToken');
-    res.json({ data: null, message: "You're logged out." });
+    res.status(200).json({ data: null, message: "You're logged out." });
   } else {
-    res.status(404).json({data:null, message: "Not authorized."})
+    res.status(404).json({ data:null, message: "Not authorized."})
   }
 }

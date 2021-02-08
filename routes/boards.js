@@ -1,9 +1,11 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 const controllers = require("../controllers");
 
-//* POST /boards/signin/basic
+//* POST /boards
+
+// router.get("/", controllers.)
 // router.post("/signin/basic", controllers.basicLogin);
 
 // router.post("/signin/social", controllers.socialLogin.callback)

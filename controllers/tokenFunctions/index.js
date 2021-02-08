@@ -20,6 +20,7 @@ module.exports = {
   resendAccessToken: (res, accessToken, data) => {
     res.json({ data: { accessToken, userInfo: data }, message: "ok" });
   },
+  
   isAuthorized: (req) => {
     console.log('======req.headers["authorization"]===========')
     console.log(req.headers["authorization"])
