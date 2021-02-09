@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(model.progresses,{
+      this.belongsTo(models.progresses,{
         foreignKey : 'progress_id'
       })
     }
