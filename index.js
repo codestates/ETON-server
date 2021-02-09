@@ -18,7 +18,15 @@ app.use((req, res, next) => {
 //! cors warning 발생 시 origin: "*" 필요
 app.use(
   cors({
+<<<<<<< HEAD
     origin: ["http://localhost:3000", "http://192.168.0.10:3000"],
+=======
+    origin: [
+      "https://eton-project.ga",
+      "http://192.168.0.10:3000",
+      "https://192.168.0.10:3000",
+    ], //! 수정 요망
+>>>>>>> d02a255b24ac66c93aa1549f423fdc7f8ea95d00
     credentials: true,
   })
 );
