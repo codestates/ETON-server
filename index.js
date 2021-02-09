@@ -23,12 +23,15 @@ app.use(
       "https://eton-project.ga",
       "http://192.168.0.10:3000",
       "https://192.168.0.10:3000",
+      "http://localhost:3000",
+      "https://localhost:3000",
     ], //! 수정 요망
     credentials: true,
     sameSite: "none",
   })
 );
 
+//! 서버 작동 테스트용. 배포 전 삭제
 app.get("/", (req, res) => {
   res.json("hey");
 });
@@ -37,6 +40,7 @@ app.use(cookieParser());
 
 app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
+app;
 
 app.listen(4000, () => console.log(`server runnning on 4000`));
 
