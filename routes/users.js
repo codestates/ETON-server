@@ -7,7 +7,9 @@ const controllers = require("../controllers");
 
 router.post("/signin/basic", controllers.basicLogin);
 
-router.get("/signin/github/callback", controllers.socialLogin.callback);
+//! 클라이언트 부분 추가
+// router.get("/signin/github", controllers.socialLogin.logIntoGithub);
+router.post("/signin/github/callback", controllers.socialLogin.callback);
 
 router.post("/signup/email", controllers.basicSignup.isEmailUnique);
 
