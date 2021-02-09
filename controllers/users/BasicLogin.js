@@ -24,7 +24,7 @@ module.exports = (req, res) => {
       console.log(data);
       console.log("=================");
       if (!data) {
-        return res.json({ data: null, message: "not authorized" });
+        return res.status(403).json({ message: "Invalid user id or password" });
       }
       delete data.dataValues.password;
       const accessToken = generateAccessToken(data.dataValues);
