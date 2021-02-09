@@ -37,11 +37,11 @@ async function callback(req, res, next) {
       },
     });
     console.log(githubData.data);
-    const { email } = githubData.data.user;
-    const exUser = await users.findOne({ where: { email } });
+    const { login } = githubData.data.user;
+    const exUser = await users.findOne({ where: { username: login } });
     if (!exUser) {
       await users.create({
-        email,
+        username: login,
       });
     }
     const accessToken = generateAccessToken(exUser.dataValues);
