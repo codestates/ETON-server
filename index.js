@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: "*", //! 수정 요망
+    origin: ["https://eton-project.ga", "http://192.168.0.10:3000"], //! 수정 요망
     credentials: true,
   })
 );
