@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 const controllers = require("../controllers");
@@ -7,13 +7,13 @@ const controllers = require("../controllers");
 
 router.post("/signin/basic", controllers.basicLogin);
 
-router.get("/signin/github/callback", controllers.socialLogin.callback)
+router.get("/signin/github/callback", controllers.socialLogin.callback);
 
-router.get("/signup/email", controllers.basicSignup.isEmailUnique)
+router.post("/signup/email", controllers.basicSignup.isEmailUnique);
 
-router.post("/signup", controllers.basicSignup.signup)
+router.post("/signup", controllers.basicSignup.signup);
 
-router.post("/signout", controllers.logout)
+router.post("/signout", controllers.logout);
 
 router.get("/userinfo", controllers.userInfo.getUserInfo);
 router.post("/userinfo", controllers.userInfo.modifyUserInfo);
