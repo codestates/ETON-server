@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.users);
-      this.hasMany(models.progress)
+      this.hasMany(models.progresses);
     }
   };
   boards.init({

@@ -44,9 +44,9 @@ app.use(cookieParser());
 //* 라우터
 app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
-app.use("/boards/:board_id/member", memberRouter);
-app.use("/boards/:board_id/progress", progressRouter);
-app.use("/boards/:board_id/tasks", taskRouter);
+// app.use("/boards/:board_id/member", memberRouter);
+// app.use("/boards/:board_id/progress", progressRouter);
+// app.use("/boards/:board_id/tasks", taskRouter);
 
 app.listen(4000, () => console.log(`server runnning on 4000`));
 

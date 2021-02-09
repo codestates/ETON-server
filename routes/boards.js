@@ -5,7 +5,10 @@ const controllers = require("../controllers");
 
 //* POST /boards
 
-// router.get("/", controllers.)
+router.get("/", controllers.boards.boards.getAllBoard);
+router.post("/", controllers.boards.boards.createNewBoard);
+
+router.patch("/:board_id", controllers.boards.patchBoard.modifyBoard);
 // router.post("/signin/basic", controllers.basicLogin);
 
 // router.post("/signin/social", controllers.socialLogin.callback)

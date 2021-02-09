@@ -5,5 +5,7 @@ module.exports = {
   userInfo: require('./users/UserInfo'),
   refreshTokenRequest: require('./users/RefreshTokenRequest'),
   logout: require('./users/Logout'),
-  getBoards: require('./boards/board')
+  getBoards: require('./boards/boards'),
+  /////////////////
+  boards : require('./boards')
 };
