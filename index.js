@@ -23,6 +23,8 @@ app.use(
       "https://eton-project.ga",
       "http://192.168.0.10:3000",
       "https://192.168.0.10:3000",
+      "http://localhost:3000",
+      "https://localhost:3000",
     ], //! 수정 요망
     credentials: true,
     sameSite: "none",
