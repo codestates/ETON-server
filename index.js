@@ -4,6 +4,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const usersRouter = require("./routes/users");
 const boardRouter = require("./routes/boards");
+const memberRouter = require("./routes/members");
+const progressRouter = require("./routes/progresses");
+const taskRouter = require("./routes/tasks");
 
 const express = require("express");
 const app = express();
@@ -38,9 +41,12 @@ app.get("/", (req, res) => {
 
 app.use(cookieParser());
 
+//* 라우터
 app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
-app;
+app.use("/boards/:board_id/member", memberRouter);
+app.use("/boards/:board_id/progress", progressRouter);
+app.use("/boards/:board_id/tasks", taskRouter);
 
 app.listen(4000, () => console.log(`server runnning on 4000`));
 
