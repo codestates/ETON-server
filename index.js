@@ -25,6 +25,7 @@ app.use(
       "https://192.168.0.10:3000",
     ], //! 수정 요망
     credentials: true,
+    sameSite: "none",
   })
 );
 
