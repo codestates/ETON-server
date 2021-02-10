@@ -25,34 +25,26 @@ module.exports = async (req, res) => {
     const { board_id } = req.query;
     console.log(board_id);
 
-    let progressData = await progresses.findAll();
-    //   // let progressData = await progresses.findAll({
-    //   //   include: [
-    //   //     {
-    //   //       model: boards,
-    //   //       where: { id: board_id },
-    //   //       // attributes: [],
-    //   //     },
-    //   //   ],
-    //   //   // attributes: ["id", "title", "task_priority"],
-    //   // });
+    let progressData = await progresses.findAll({
+      where: { board_id },
+      attributes: ["id", "title", "task_priority"],
+    });
 
     console.log("======progressData==========");
     console.log(progressData);
     console.log("==================================");
 
-    res.sendStatus(200);
-    //   // if (progressData.length === 0) {
-    //   //   res.sendStatus(404);
-    //   // } else {
-    //   //   let progressList = participantsData.map((progress) => {
-    //   //     let obj = {};
-    //   //     obj[progress.dataValues.id] = progress.dataValues;
-    //   //     return obj;
-    //   //   });
-    //   //   console.log(progressList);
-    //   //   res.status(200).send({ data: { progressList }, message: "Ok" });
-    //   // }
+    if (progressData.length === 0) {
+      res.sendStatus(404);
+    } else {
+      let progressList = progressData.map((progress) => {
+        let obj = {};
+        obj[progress.dataValues.id] = progress.dataValues;
+        return obj;
+      });
+      console.log(progressList);
+      res.status(200).send({ data: { progressList }, message: "Ok" });
+    }
   }
 };
 
