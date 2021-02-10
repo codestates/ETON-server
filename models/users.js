@@ -9,17 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      //   this.belongsTo(models.boards,{
-      //     foreignKey : 'admin_userid'
-      //   })
 
-      //!재현님
       this.belongsToMany(models.boards, {
         through: models.board_user,
         foreignKey: "user_id",
       });
     }
   }
+}
   users.init(
     {
       username: DataTypes.STRING,

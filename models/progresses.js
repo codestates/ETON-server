@@ -18,16 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.tasks);
     }
   }
-  progresses.init(
-    {
-      title: DataTypes.STRING,
-      task_priority: DataTypes.STRING,
-      board_id: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "progresses",
-    }
-  );
+  };
+  progresses.init({
+    title: DataTypes.STRING,
+    task_priority: {type : DataTypes.STRING, defaultValue : ''},
+    board_id: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'progresses',
+  });
   return progresses;
 };

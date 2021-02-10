@@ -8,10 +8,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasOne(models.users, {
-        foreignKey: {
-          name: "id",
-        },
+      // define association here
+      this.hasOne(models.users,{
+        foreignKey : {
+          name : 'id'
+        }
       });
       this.hasMany(models.progresses);
 
@@ -21,16 +22,15 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  boards.init(
-    {
-      title: DataTypes.STRING,
-      prg_priority: DataTypes.STRING,
-      admin_userid: DataTypes.NUMBER,
-    },
-    {
-      sequelize,
-      modelName: "boards",
-    }
-  );
+  };
+  boards.init({
+    title: DataTypes.STRING,
+    prg_priority: {type : DataTypes.STRING, defaultValue : ''},
+    admin_userid: DataTypes.NUMBER
+  }, {
+    sequelize,
+    modelName: 'boards',
+  });
+
   return boards;
 };
