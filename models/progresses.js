@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   progresses.init({
     title: DataTypes.STRING,
-    task_priority: DataTypes.STRING,
+    task_priority: {type : DataTypes.STRING, defaultValue : ''},
     board_id: DataTypes.INTEGER
   }, {
     sequelize,

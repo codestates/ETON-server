@@ -11,13 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.users);
+      this.hasOne(models.users,{
+        foreignKey : {
+          name : 'id'
+        }
+      });
       this.hasMany(models.progresses);
     }
   };
   boards.init({
     title: DataTypes.STRING,
-    prg_priority: DataTypes.STRING,
+    prg_priority: {type : DataTypes.STRING, defaultValue : ''},
     admin_userid: DataTypes.NUMBER
   }, {
     sequelize,
