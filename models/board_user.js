@@ -8,14 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.users, {
-        foreignKey: "id",
-      });
-      this.hasMany(models.boards, {
-        foreignKey: "id",
-      });
+
+      // define association here
+      this.hasMany(models.users,{
+        foreignKey : 'id',
+        onDelete : 'CASCADE'
+      })
+      this.hasMany(models.boards,{
+        foreignKey: 'id',
+        onDelete : 'CASCADE'
+      })
     }
   }
+}
   board_user.init(
     {
       board_id: DataTypes.INTEGER,

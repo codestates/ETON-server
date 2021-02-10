@@ -10,10 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      this.belongsToMany(models.boards, {
-        through: models.board_user,
-        foreignKey: "user_id",
-      });
+      // this.belongsTo(models.boards,{
+      //   foreignKey : 'admin_userid'
+      // })
+
+      this.belongsToMany(models.boards, {through : models.board_user, foreignKey : 'user_id'})
+
     }
   }
 }

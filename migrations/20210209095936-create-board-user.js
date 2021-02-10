@@ -14,7 +14,8 @@ module.exports = {
           model : 'boards',
           key : 'id'
         },
-        allowNull : false
+        allowNull : false,
+        onDelete : 'CASCADE'
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -22,7 +23,8 @@ module.exports = {
           model : 'users',
           key : 'id'
         },
-        allowNull : false
+        allowNull : false,
+        onDelete : 'CASCADE',
       },
       createdAt: {
         allowNull: false,

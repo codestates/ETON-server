@@ -12,14 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.users,{
         foreignKey : {
           name : 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       });
       this.hasMany(models.progresses);
 
-      this.belongsToMany(models.users, {
-        through: models.board_user,
-        foreignKey: "board_id",
-      });
+      this.belongsToMany(models.users, {through : models.board_user, foreignKey : 'board_id'})///////
+
+      
+
     }
   }
   };

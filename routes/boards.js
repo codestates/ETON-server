@@ -9,7 +9,9 @@ const controllers = require("../controllers");
 router.get("/", controllers.boards.boards.getAllBoard);
 router.post("/", controllers.boards.boards.createNewBoard);
 
-router.patch("/:board_id", controllers.boards.patchBoard.modifyBoard);
+router.patch("/title", controllers.boards.patchBoard.modifyBoardTitle);
+
+router.delete('/', controllers.boards.deleteBoard.deleteBoard);
 // router.post("/signin/basic", controllers.basicLogin);
 
 // router.post("/signin/social", controllers.socialLogin.callback)
