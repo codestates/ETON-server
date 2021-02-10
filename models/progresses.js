@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class progresses extends Model {
     /**
@@ -11,11 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.boards,{
-        foreignKey : 'board_id'
-      })
+      // this.belongsTo(models.boards,{
+      //   foreignKey : 'board_id'
+      // })
+      this.belongsTo(models.boards, {
+        foreignKey: "board_id",
+      });
       this.hasMany(models.tasks);
     }
+  }
   };
   progresses.init({
     title: DataTypes.STRING,
