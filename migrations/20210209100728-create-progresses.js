@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING(45)
       },
       task_priority: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue : ''
       },
       board_id: {
         type: Sequelize.INTEGER,

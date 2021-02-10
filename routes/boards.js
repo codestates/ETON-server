@@ -1,4 +1,5 @@
 var express = require("express");
+const { post } = require("..");
 var router = express.Router();
 
 const controllers = require("../controllers");
@@ -16,5 +17,9 @@ router.patch("/:board_id", controllers.boards.patchBoard.modifyBoard);
 // router.get("/signup/email", controllers.basicSignup.isEmailUnique)
 
 // router.post("/signup", controllers.basicSignup.signUp)
+
+// '/board/patchBoard'
+
+
 
 module.exports = router;

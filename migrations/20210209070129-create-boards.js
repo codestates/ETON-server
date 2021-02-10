@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING(45)
       },
       prg_priority: {
-        type: Sequelize.STRING(45)
+        type: Sequelize.STRING(45),
+        defaultValue : ''
       },
       admin_userid: {
         type: Sequelize.INTEGER,
