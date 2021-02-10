@@ -19,11 +19,9 @@ module.exports = (sequelize, DataTypes) => {
 
       this.belongsToMany(models.users, {through : models.board_user, foreignKey : 'board_id'})///////
 
-      
-
     }
   }
-  };
+  
   boards.init({
     title: DataTypes.STRING,
     prg_priority: {type : DataTypes.STRING, defaultValue : ''},

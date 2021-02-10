@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
-}
+
   board_user.init(
     {
       board_id: DataTypes.INTEGER,
