@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.users,{
         foreignKey : {
           name : 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       });
       this.hasMany(models.progresses);
 

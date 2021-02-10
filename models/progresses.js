@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.boards,{
-        foreignKey : 'board_id'
+        foreignKey : 'board_id',
+        onDelete : 'CASCADE'
       })
       this.hasMany(models.tasks);
     }
