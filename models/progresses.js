@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.tasks);
     }
   }
-  };
+  
   progresses.init({
     title: DataTypes.STRING,
     task_priority: {type : DataTypes.STRING, defaultValue : ''},
