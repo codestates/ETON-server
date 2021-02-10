@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       // this.belongsTo(models.boards,{
       //   foreignKey : 'admin_userid'
       // })
+
+      this.belongsToMany(models.boards, {through : models.board_user, foreignKey : 'user_id'})
     }
   };
   users.init({

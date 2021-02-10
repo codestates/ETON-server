@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
       this.hasMany(models.progresses);
+
+      this.belongsToMany(models.users, {through : models.board_user, foreignKey : 'board_id'})///////
     }
   };
   boards.init({
