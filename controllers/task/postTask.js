@@ -8,6 +8,7 @@ module.exports = {
       await tasks
         .create({
           title: req.body.title,
+          description: req.body.description,
           progress_id: Number(req.body.progress_id),
         })
         .then((result) => {
