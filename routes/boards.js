@@ -6,12 +6,14 @@ const controllers = require("../controllers");
 
 //* POST /boards
 
+router.get("/", controllers.boards.boards.getBoardInfo);
 router.get("/", controllers.boards.boards.getAllBoard);
+
 router.post("/", controllers.boards.boards.createNewBoard);
 
 router.patch("/title", controllers.boards.patchBoard.modifyBoardTitle);
 
-router.delete('/', controllers.boards.deleteBoard.deleteBoard);
+router.delete("/", controllers.boards.deleteBoard.deleteBoard);
 // router.post("/signin/basic", controllers.basicLogin);
 
 // router.post("/signin/social", controllers.socialLogin.callback)
@@ -21,7 +23,5 @@ router.delete('/', controllers.boards.deleteBoard.deleteBoard);
 // router.post("/signup", controllers.basicSignup.signUp)
 
 // '/board/patchBoard'
-
-
 
 module.exports = router;
