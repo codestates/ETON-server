@@ -15,37 +15,28 @@ const {
 } = require("../tokenFunctions");
 
 module.exports = async (req, res) => {
-  console.log("======req.query==========");
-  console.log(req.query);
+  console.log("======req.body==========");
+  console.log(req.body);
   console.log("=========================");
+
   const accessTokenData = isAuthorized(req);
   if (!accessTokenData) {
     res.status(403).send({ message: "Invalid access token." });
   } else {
-    const board_id = req.query.board_id;
-    let participantsData = await users.findAll({
-      include: [
-        {
-          model: boards,
-          where: { id: board_id },
-          attributes: [],
-        },
-      ],
-      attributes: ["id", "username"],
-    });
-
-    console.log("======participantsNumber==========");
-    console.log(participantsData);
-    console.log("==================================");
-
-    if (participantsData.length === 0) {
-      res.sendStatus(404);
+    const { board_id, progress_id, title } = req.body;
+    let count = await progresses.count({ where: { board_id, title } });
+    console.log(count);
+    if (count > 0) {
+      res
+        .status(409)
+        .send({ message: "The progress already exists on the board." });
     } else {
-      let userList = participantsData.map(
-        (participant) => participant.dataValues
-      );
-      console.log(userList);
-      res.status(200).send({ data: { userList }, message: "Ok" });
+      let progressInfo = await progresses.findOne({
+        where: { id: progress_id },
+        attributes: ["id", "title"],
+      });
+      progressInfo.update({ title });
+      res.sendStatus(200);
     }
   }
 };

@@ -9,7 +9,7 @@ module.exports = {
   /////////////////
   boards: require("./boards"),
 
-  //* member
+  //* member, progress
   member: require("./member"),
   progress: require("./progress"),
 };
