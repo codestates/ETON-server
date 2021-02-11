@@ -1,4 +1,5 @@
 const {tasks, progresses, boards, sequelize} = require('../../models');
+const {	isAuthorized } = require('../tokenFunctions');
 
 
 module.exports = {
@@ -44,6 +45,8 @@ module.exports = {
     },
     getAllTaskByUser : async (req,res) => {
         console.log("Get All Task by user - req.query : ", req.query);
+        let parsed = isAuthorized(req);
+
         let sql = `select tasks.id, tasks.title, tasks.description, progresses.id as progressId, progresses.title as progressTitle, boards.id as boardId, boards.title as boardTitle, boards.admin_userid, users.id as userId, users.username
                     from tasks
                     left join progresses
@@ -54,9 +57,12 @@ module.exports = {
                         on boards.id = board_users.board_id
                     left join users
                         on board_users.user_id = users.id
-                    where users.id = ${req.query.user_id}`
+                    where users.id = ${parsed.id}`
         
         if (req.headers["authorization"]) {
+
+            
+
             await sequelize.query(sql)
             .then(result => {
                 console.log("성공~");

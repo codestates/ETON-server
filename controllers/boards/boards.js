@@ -109,6 +109,60 @@ module.exports = {
     }
   },
 
+
+		console.log("createNewBoard - req.body : ", req.body);
+		if (req.headers["authorization"]) {
+			
+			let parsed = isAuthorized(req);
+
+			console.log("@@@@@@parsed : ", parsed);
+
+			let board_id;
+			let newBoardInfo = await boards.create({
+				admin_userid: parsed.id,
+				title: req.body.title
+			})
+			.then(result => {
+				board_id = result.dataValues.id;
+				board_user.create({
+					board_id,
+					user_id : Number(parsed.id)
+				})
+			.then(result => {
+				// console.log("res2 : ", result);
+				console.log("board_id : ", board_id);
+				res
+					.status(200)
+					.send({
+						id : board_id,
+						message : "Created"
+					})
+			})
+			.catch(err => {
+				console.log("err2 : ", err);
+				res.status(404).send({message : 'create failed'})
+			})
+		})
+		.catch(err => {
+			console.log("err1 : ", err);
+			res
+				.status(404)
+				.send({
+					message : "create failed"
+				})
+		})
+
+		}else{
+			res
+				.status(403)
+				.send({
+					message : "Invalid access token."
+				})
+		}
+
+	}
+}
+
   getBoardInfo: async (req, res) => {
     const accessTokenData = isAuthorized(req);
     if (!accessTokenData) {
@@ -125,3 +179,4 @@ module.exports = {
     }
   },
 };
+

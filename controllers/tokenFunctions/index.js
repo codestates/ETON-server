@@ -14,20 +14,17 @@ module.exports = {
     });
   },
   sendAccessToken: (res, accessToken) => {
-    console.log("access token 전달");
-    res.status(200).send({ data: { accessToken }, message: "ok" });
+    res.json({ data: { accessToken }, message: "ok" });
   },
 
   resendAccessToken: (res, accessToken, data) => {
-    res
-      .status(200)
-      .send({ data: { accessToken, userInfo: data }, message: "ok" });
+    res.json({ data: { accessToken, userInfo: data }, message: "ok" });
   },
-
+  
   isAuthorized: (req) => {
-    console.log('======req.headers["authorization"]===========');
-    console.log(req.headers["authorization"]);
-    console.log("=============================================");
+    console.log('======req.headers["authorization"]===========')
+    console.log(req.headers["authorization"])
+    console.log('=============================================')
     const authorization = req.headers["authorization"];
     if (!authorization) {
       return null;
