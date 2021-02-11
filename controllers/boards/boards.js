@@ -76,6 +76,7 @@ module.exports = {
 
 		console.log("createNewBoard - req.body : ", req.body);
 		if (req.headers["authorization"]) {
+			
 			let parsed = isAuthorized(req);
 
 			console.log("@@@@@@parsed : ", parsed);
@@ -103,6 +104,7 @@ module.exports = {
 			})
 			.catch(err => {
 				console.log("err2 : ", err);
+				res.status(404).send({message : 'create failed'})
 			})
 		})
 		.catch(err => {
