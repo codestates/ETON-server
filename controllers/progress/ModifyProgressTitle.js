@@ -24,19 +24,30 @@ module.exports = async (req, res) => {
     res.status(403).send({ message: "Invalid access token." });
   } else {
     const { board_id, progress_id, title } = req.body;
-    let count = await progresses.count({ where: { board_id, title } });
-    console.log(count);
-    if (count > 0) {
-      res
-        .status(409)
-        .send({ message: "The progress already exists on the board." });
-    } else {
-      let progressInfo = await progresses.findOne({
-        where: { id: progress_id },
-        attributes: ["id", "title"],
-      });
+    // let count = await progresses.count({ where: { board_id, title } });
+    // console.log(count);
+    // if (count > 0) {
+    //   res
+    //     .status(409)
+    //     .send({ message: "The progress already exists on the board." });
+    // } else {
+    //   let progressInfo = await progresses.findOne({
+    //     where: { id: progress_id },
+    //     attributes: ["id", "title"],
+    //   });
+    //   progressInfo.update({ title });
+    //   res.sendStatus(200);
+    // }
+
+    let progressInfo = await progresses.findOne({
+      where: { id: progress_id },
+      attributes: ["id", "title"],
+    });
+    if (progressInfo) {
       progressInfo.update({ title });
       res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
     }
   }
 };
