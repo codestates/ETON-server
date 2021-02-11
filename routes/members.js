@@ -7,8 +7,8 @@ const controllers = require("../controllers");
 
 router.get("/", controllers.member.getAllMemberInfo);
 router.get("/userinfo", controllers.member.getMemberInfo);
-// router.post("/", controllers.member.addMember);
-// router.post("/", controllers.member.deleteMember);
+router.post("/", controllers.member.addMember);
+router.delete("/", controllers.member.deleteMember);
 
 module.exports = router;
 

@@ -21,18 +21,19 @@ module.exports = async (req, res) => {
     res.status(403).send({ message: "Invalid access token." });
   } else {
     let { username } = req.query;
-    let userData = await users.findOne({
+    let userData = await users.findAll({
       where: { username },
+      attributes: { exclude: ["password"] },
     });
     console.log(userData);
-    if (!userData) {
+    if (userData.length === 0) {
       res
         .status(404)
         .send({ message: "There's no user or please submit correct name." });
     } else {
-      let userInfo = userData.dataValues;
-      delete userInfo.password;
-      res.status(200).send({ data: { userInfo }, message: "ok" });
+      let userInfo = userData.map((data) => data.dataValues);
+      // delete userInfo.password;
+      res.status(200).send({ data: { userInfo }, message: "Ok." });
     }
   }
 };

@@ -16,28 +16,29 @@ const {
 const e = require("express");
 
 module.exports = async (req, res) => {
-  console.log(req.query);
+  console.log(req.body);
 
   let accessTokenData = isAuthorized(req);
   if (!accessTokenData) {
     res.status(403).send({ message: "Invalid access token." });
   } else {
-    let { username } = req.query;
-    let userData = await users.findOne({
-      where: { username },
+    let { board_id, user_id } = req.body;
+
+    let participant = await board_user.findOne({
+      where: { board_id, user_id },
     });
-    console.log(userData);
-    if (!userData) {
+    console.log("******************************");
+    console.log(participant);
+    console.log("******************************");
+    if (participant) {
       res
         .status(404)
-        .send({ message: "There's no user or please submit correct name." });
+        .send({ message: "The user's already a member of the project." });
     } else {
-      let userInfo = userData.dataValues;
-      delete userInfo.password;
-      res.status(200).send({ data: { userInfo }, message: "ok" });
+      board_user.create({ board_id, user_id });
+      res
+        .status(201)
+        .send({ id: user_id, message: "The user was added to the project." });
     }
   }
 };
-
-//* 쿼리문
-//select users.id, users.username from board_users left join users on board_users.user_id = users.id where board_id = 3;
