@@ -37,11 +37,11 @@ module.exports = async (req, res) => {
     if (progressData.length === 0) {
       res.sendStatus(404);
     } else {
-      let progressList = progressData.map((progress) => {
-        let obj = {};
-        obj[progress.dataValues.id] = progress.dataValues;
-        return obj;
+      let progressList = {};
+      progressData.forEach((progress) => {
+        progressList[progress.dataValues.id] = progress.dataValues;
       });
+
       console.log(progressList);
       res.status(200).send({ data: { progressList }, message: "Ok" });
     }
