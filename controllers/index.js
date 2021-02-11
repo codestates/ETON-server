@@ -14,5 +14,5 @@ module.exports = {
   progress: require("./progress"),
 
   //*task
-  task : require('./task')
+  task: require("./task"),
 };
