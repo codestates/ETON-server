@@ -24,43 +24,44 @@ module.exports = async (req, res) => {
     res.status(403).send({ message: "Invalid access token." });
   } else {
     const { board_id, title } = req.body;
-    let [newProgressData, created] = await progresses.findOrCreate({
-      where: { board_id, title },
-      attributes: ["id"],
-    });
+    // let [newProgressData, created] = await progresses.findOrCreate({
+    //   where: { board_id, title },
+    //   attributes: ["id"],
+    // });
 
-    console.log("=========================");
+    // console.log("=========================");
+    // console.log(newProgressData);
+    // console.log("=========================");
+    // console.log(created);
+    // console.log("=========================");
+
+    let newProgressData = await progresses.create({ board_id, title });
+    console.log("================");
     console.log(newProgressData);
-    console.log("=========================");
-    console.log(created);
-    console.log("=========================");
+    console.log("================");
+    let progress_id = newProgressData.dataValues.id;
 
-    const progress_id = newProgressData.dataValues.id;
-    if (created) {
-      let board = await boards.findOne({ where: { id: board_id } });
-      if (
-        board.dataValues.prg_priority === "" ||
-        board.dataValues.prg_priority === null
-      ) {
-        board.update({
-          prg_priority: "" + progress_id,
-        });
-      } else {
-        board.update({
-          prg_priority: board.dataValues.prg_priority + "," + progress_id,
-        });
-      }
-      console.log("=========================");
-      console.log(board);
-      console.log("=========================");
-
-      res.status(201).send({
-        id: progress_id,
-        message: "ok",
+    let board = await boards.findOne({ where: { id: board_id } });
+    if (
+      board.dataValues.prg_priority === "" ||
+      board.dataValues.prg_priority === null
+    ) {
+      board.update({
+        prg_priority: "" + progress_id,
       });
     } else {
-      res.status(409).send({ message: "The progress is already added." });
+      board.update({
+        prg_priority: board.dataValues.prg_priority + "," + progress_id,
+      });
     }
+    console.log("=========================");
+    console.log(board);
+    console.log("=========================");
+
+    res.status(201).send({
+      id: progress_id,
+      message: "ok",
+    });
   }
 };
 
