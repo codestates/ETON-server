@@ -51,15 +51,40 @@ module.exports = {
         
         console.log('modifyTaskProgressOrder : req.body : ', req.body);
 
+        // {
+        //     task_id : #움직인 태스크카드 번호,
+        //     source : {
+        //        progress_id : #출발지 번호,
+        //        task_priority : 업데이트된 순서
+        //     },
+        //     target : {
+        //        progress_id : #도착지 번호,
+        //        task_priority : 업데이트된 순서
+        //     },
+        //   }
+
         if (req.headers["authorization"]) {
-            await tasks.update({
-                progress_id : req.body.progress_id
+            await tasks.update({                                    //1.출발지의 정보들 부터 먼저 바꿔준다.
+                progress_id : req.body.target.progress_id
             },{
                 where : {id : req.body.task_id}
-            })
-            .then(result => {
-                console.log("성공");
-                res.status(200).send({message : 'Ok'})
+            }).then(result => {
+                progresses.update({
+                    task_priority : req.body.source.task_priority
+                },{
+                    where : {id : req.body.source.progress_id}
+                })
+                .then(result => {                                   //2.도착지의 정보들을 바꿔준다.
+                    progresses.update({
+                        task_priority : req.body.target.task_priority
+                    },{
+                        where : {id : req.body.target.progress_id}
+                    })
+                    .then(result => {
+                        console.log("성공!");
+                        res.status(200).send({message : 'ok'});
+                    })
+                })
             })
             .catch(err => {
                 console.log("err : ", err);
