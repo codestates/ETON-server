@@ -13,7 +13,7 @@ const {
 module.exports = {
   getAllBoard: async (req, res) => {
     // console.log(req.headers);
-    console.log("req : ", req.query);
+	console.log("!!!getAllBoard!!!");
 
     let sql = `select b.id as boardID, b.admin_userid, b.title, b.prg_priority 
               from boards as b 
@@ -27,41 +27,36 @@ module.exports = {
       let parsed = isAuthorized(req);
       console.log("@@@@@@pared : ", parsed);
 
-      res.status(200);
-    }
-    //   let getAllBoard = await users.findAll({
-    //     where: { id: parsed.id },
-    //     include: [{ model: boards }],
-    //   });
-    //   if (getAllBoard) {
-    //     // console.log("allBoards : ",getAllBoard[0].dataValues.boards);
-    //     // console.log("allBoards : ",getAllBoard);
-    //     let boardList = [];
-    //     getAllBoard[0].dataValues.boards.forEach((el) => {
-    //       let eachBoardInfo = {
-    //         id: el.dataValues.id,
-    //         title: el.dataValues.title,
-    //         admin_userid: el.dataValues.admin_userid,
-    //         prg_priority: el.dataValues.prg_priority,
-    //       };
-    //       boardList.push(eachBoardInfo);
-    //     });
-    //     res.status(200).send({
-    //       message: "ok",
-    //       data: {
-    //         boardList,
-    //       },
-    //     });
-    //   } else {
-    //     res.status(404).send({
-    //       message: "Not Found.",
-    //     });
-    //   }
-    // } else {
-    //   res.status(403).send({
-    //     message: "Invalid access token.",
-    //   });
-    // }
+	  let getAllBoard = await users.findAll({
+        where: { id: parsed.id },
+        include: [{ model: boards }],
+      });
+      if (getAllBoard) {
+        let boardList = [];
+        getAllBoard[0].dataValues.boards.forEach((el) => {
+          let eachBoardInfo = {
+            id: el.dataValues.id,
+            title: el.dataValues.title,
+            admin_userid: el.dataValues.admin_userid,
+            prg_priority: el.dataValues.prg_priority,
+          };
+          boardList.push(eachBoardInfo);
+        });
+        res.status(200).send({
+          message: "ok",
+          data: {
+            boardList,
+          },
+        });
+      } else {
+        res.status(404).send({
+          message: "Not Found.",
+        });
+      }
+    }else{
+		res.status(403).send({message : 'Invalid Access Token.'});
+	}
+   
   },
 
   createNewBoard: async (req, res) => {

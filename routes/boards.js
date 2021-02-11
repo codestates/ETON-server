@@ -6,8 +6,8 @@ const controllers = require("../controllers");
 
 //* POST /boards
 
-router.get("/", controllers.boards.boards.getBoardInfo);
-router.get("/", controllers.boards.boards.getAllBoard);
+router.get("/one", controllers.boards.boards.getBoardInfo);
+router.get("/all", controllers.boards.boards.getAllBoard);
 
 router.post("/", controllers.boards.boards.createNewBoard);
 
