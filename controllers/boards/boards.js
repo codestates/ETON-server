@@ -7,6 +7,7 @@ const {
 	generateRefreshToken,
 	sendRefreshToken,
 	sendAccessToken,
+	isAuthorized,
 } = require('../tokenFunctions');
 
 module.exports = {
@@ -22,8 +23,12 @@ module.exports = {
 
 		if (req.headers["authorization"]) {
 			// let allBoardsInfo = await users.findByPk(1, {include : ['userId']})
+
+			let parsed = isAuthorized(req);
+			console.log("@@@@@@pared : ", parsed);
+
 			let getAllBoard = await users.findAll({
-				where: { id: req.query.user_id },
+				where: { id: parsed.id },
 				include: [
 					{ model: boards },
 				]
@@ -65,23 +70,26 @@ module.exports = {
 				})
 		}
 
-
 	},
 
 	createNewBoard: async (req, res) => {
 
 		console.log("createNewBoard - req.body : ", req.body);
 		if (req.headers["authorization"]) {
+			let parsed = isAuthorized(req);
+
+			console.log("@@@@@@parsed : ", parsed);
+
 			let board_id;
 			let newBoardInfo = await boards.create({
-				admin_userid: req.body.user_id,
+				admin_userid: parsed.id,
 				title: req.body.title
 			})
 			.then(result => {
 				board_id = result.dataValues.id;
 				board_user.create({
 					board_id,
-					user_id : Number(req.body.user_id)
+					user_id : Number(parsed.id)
 				})
 			.then(result => {
 				// console.log("res2 : ", result);
