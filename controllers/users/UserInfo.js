@@ -1,4 +1,8 @@
-const { isAuthorized } = require("../tokenFunctions");
+const {
+  isAuthorized,
+  generateAccessToken,
+  sendAccessToken,
+} = require("../tokenFunctions");
 const { users } = require("../../models");
 
 function getUserInfo(req, res) {
@@ -29,16 +33,29 @@ function getUserInfo(req, res) {
 }
 
 async function modifyUserInfo(req, res) {
-  const { id, email, password, username } = req.body;
-  let userInfo = await users.findOne({ where: { id } });
-  if (!userInfo) {
-    res.status(404).json({ message: "Not found." });
+  const { username } = req.body;
+
+  const accessTokenData = isAuthorized(req);
+  if (!accessTokenData) {
+    res.status(403).send({ message: "Invalid access token." });
   } else {
-    userInfo.email = email;
-    userInfo.password = password;
-    userInfo.username = username;
-    await userInfo.save();
-    res.send(201).json({ message: "Your info got modified." });
+    const { id } = accessTokenData;
+    console.log(accessTokenData);
+    await users
+      .update(
+        {
+          username: username,
+        },
+        {
+          where: { id },
+        }
+      )
+      .then(() =>
+        res.status(200).send({
+          id: id,
+          message: "Your info got modified.",
+        })
+      );
   }
 }
 

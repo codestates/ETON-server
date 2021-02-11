@@ -3,8 +3,6 @@ var router = express.Router();
 
 const controllers = require("../controllers");
 
-//* POST /users/signin/basic
-
 router.post("/signin/basic", controllers.basicLogin);
 
 //! 클라이언트 부분 추가
@@ -18,7 +16,7 @@ router.post("/signup", controllers.basicSignup.signup);
 router.post("/signout", controllers.logout);
 
 router.get("/userinfo", controllers.userInfo.getUserInfo);
-router.post("/userinfo", controllers.userInfo.modifyUserInfo);
+router.put("/userinfo", controllers.userInfo.modifyUserInfo);
 router.get("/refreshtokenrequest", controllers.refreshTokenRequest);
 
 module.exports = router;
