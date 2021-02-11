@@ -23,8 +23,12 @@ module.exports = {
 
 		if (req.headers["authorization"]) {
 			// let allBoardsInfo = await users.findByPk(1, {include : ['userId']})
+
+			let parsed = isAuthorized(req);
+			console.log("@@@@@@pared : ", parsed);
+
 			let getAllBoard = await users.findAll({
-				where: { id: req.query.user_id },
+				where: { id: parsed.id },
 				include: [
 					{ model: boards },
 				]
@@ -65,7 +69,6 @@ module.exports = {
 					message: 'Invalid access token.'
 				})
 		}
-
 
 	},
 
