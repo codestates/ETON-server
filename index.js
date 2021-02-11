@@ -6,7 +6,7 @@ const usersRouter = require("./routes/users");
 const boardRouter = require("./routes/boards");
 const memberRouter = require("./routes/members");
 const progressRouter = require("./routes/progresses");
-// const taskRouter = require("./routes/tasks");
+const taskRouter = require("./routes/tasks");
 
 const express = require("express");
 const app = express();
@@ -48,6 +48,7 @@ app.use("/users", usersRouter);
 app.use("/boards", boardRouter);
 app.use("/member", memberRouter);
 app.use("/progress", progressRouter);
+app.use("/task", taskRouter);
 // app.use("/boards/:board_id/progress", progressRouter);
 // app.use("/boards/:board_id/tasks", taskRouter);
 

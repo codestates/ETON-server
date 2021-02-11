@@ -12,4 +12,7 @@ module.exports = {
   //* member
   member: require("./member"),
   progress: require("./progress"),
+
+  //*task
+  task : require('./task')
 };
